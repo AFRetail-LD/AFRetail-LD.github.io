@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Copilot Guidebook — Al-Futtaim Retail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --paper:#EAF0F6; --canvas:#F3F7FB; --surface:#FFFFFF;
+  --ink:#0E2234; --ink-2:#44586B; --ink-3:#657788;
+  --line:#C2D2E0; --line-soft:#DDE8F1; --fill:#EAF1F8; --fill-2:#D4E3F0;
+  --blue:#005AAB; --blue-soft:#DCEAF7; --call:#0077C8;
+  --brand-deep:#003C73; --brand-bright:#00AEEF; --brand-pale:#CFE0EF;
+  --pos:#1F7A52; --pos-soft:#D8EDE2; --warn:#B07A10; --warn-soft:#F6EBD0; --neg:#A83C35; --neg-soft:#F5DEDC;
+
+  --cb:#002E5C; --pi:#1B429A; --so:#005AAB; --mc:#00708F; --df:#2F6BA8; --hr:#0E4C6E;
+  --ta:#3A5BA0; --ld:#167A8C; --fi:#334E7A; --le:#4A6E8F; --ea:#5566A8; --lf:#0F3B4D;
+
+  --font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0B1620; --canvas:#12202C; --surface:#1A2A38;
+  --ink:#E4EDF5; --ink-2:#AEC0D0; --ink-3:#7A8FA2;
+  --line:#2F4454; --line-soft:#243542; --fill:#22323F; --fill-2:#2E4252;
+  --blue:#6FB4EC; --blue-soft:#17354F; --call:#55B5EF;
+  --brand-deep:#0B2033; --brand-bright:#44C7F5; --brand-pale:#2A4459;
+  --pos:#53BE8A; --pos-soft:#17402E; --warn:#DFA655; --warn-soft:#42341A; --neg:#E0837A; --neg-soft:#452522;
+  --cb:#8FB9EA; --pi:#8EA3EE; --so:#6FB4EC; --mc:#5BBBD2; --df:#86B2E2; --hr:#6FBEDC;
+  --ta:#9AACEE; --ld:#5FC6D8; --fi:#A0B2DC; --le:#9EB8D0; --ea:#AEB6EE; --lf:#7FB6C8;
+}}
+:root[data-theme="dark"]{
+  --paper:#0B1620; --canvas:#12202C; --surface:#1A2A38;
+  --ink:#E4EDF5; --ink-2:#AEC0D0; --ink-3:#7A8FA2;
+  --line:#2F4454; --line-soft:#243542; --fill:#22323F; --fill-2:#2E4252;
+  --blue:#6FB4EC; --blue-soft:#17354F; --call:#55B5EF;
+  --brand-deep:#0B2033; --brand-bright:#44C7F5; --brand-pale:#2A4459;
+  --pos:#53BE8A; --pos-soft:#17402E; --warn:#DFA655; --warn-soft:#42341A; --neg:#E0837A; --neg-soft:#452522;
+  --cb:#8FB9EA; --pi:#8EA3EE; --so:#6FB4EC; --mc:#5BBBD2; --df:#86B2E2; --hr:#6FBEDC;
+  --ta:#9AACEE; --ld:#5FC6D8; --fi:#A0B2DC; --le:#9EB8D0; --ea:#AEB6EE; --lf:#7FB6C8;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 62px);-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--call);outline-offset:2px}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.01em}
+p{margin:0 0 .85rem;max-width:74ch}
+a{color:inherit}
+
+.page{max-width:1240px;margin:0 auto;padding:0 20px}
+@media (max-width:640px){.page{padding:0 14px}}
+
+/* ---------- app bar ---------- */
+.bar{position:sticky;top:0;z-index:60;background:var(--brand-deep);border-bottom:1px solid var(--brand-deep);padding-top:env(safe-area-inset-top,0px)}
+.bar h1,.bar .mark{color:#fff}
+.bar h1 small{color:#9EC5E6}
+.mark{flex:none;display:block}
+.mark svg{display:block}
+.bar #search{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28);color:#fff}
+.bar #search::placeholder{color:#9EC5E6}
+.bar #search:focus{background:rgba(255,255,255,.18);outline-color:var(--brand-bright)}
+.bar .seg{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.1)}
+.bar .seg button{color:#DCEAF7}
+.bar .seg button:hover{color:#fff}
+.bar-in{max-width:1240px;margin:0 auto;display:flex;gap:12px;align-items:center;padding:9px 20px}
+@media (max-width:640px){.bar-in{padding:8px 14px;gap:8px}}
+.bar h1{font-size:14px;white-space:nowrap}
+.bar h1 small{display:block;font-weight:400;font-size:11.5px;letter-spacing:0}
+@media (max-width:760px){.bar h1 small{display:none}}
+#search{flex:1;min-width:0;font:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--canvas);color:var(--ink)}
+#search::placeholder{color:var(--ink-3)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--canvas)}
+.seg button{padding:6px 11px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
+.seg button:hover{color:var(--ink)}
+
+/* ---------- head block ---------- */
+.head{padding:30px 0 0}
+.eyebrow{font-size:12.5px;color:var(--ink-3);margin-bottom:8px}
+.head h2.title{font-size:clamp(26px,4.2vw,38px);line-height:1.1;letter-spacing:-.025em;max-width:16ch;color:var(--brand-deep)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .head h2.title{color:var(--blue)}}
+:root[data-theme="dark"] .head h2.title{color:var(--blue)}
+.head{border-top:4px solid var(--brand-bright);margin-top:0}
+.head .lede{font-size:16px;color:var(--ink-2);max-width:62ch;margin-top:14px}
+
+.kpis{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));margin:24px 0 0}
+.kpi{border:1px solid var(--line-soft);border-top:3px solid var(--blue);border-radius:5px;padding:9px 11px;background:var(--surface)}
+.kpi:nth-child(2){border-top-color:var(--pi)}.kpi:nth-child(3){border-top-color:var(--so)}
+.kpi:nth-child(4){border-top-color:var(--df)}.kpi:nth-child(5){border-top-color:var(--mc)}.kpi:nth-child(6){border-top-color:var(--le)}
+.kpi .v{color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:600;line-height:1.15;letter-spacing:-.02em}
+.kpi .t{font-size:11.5px;color:var(--ink-2);margin-top:2px;line-height:1.3}
+
+/* ---------- card ---------- */
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:8px;padding:16px 18px;box-shadow:0 1px 0 rgba(16,24,40,.04)}
+.card-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.card-head h3{font-size:13.5px}
+.card-head span{font-size:12px;color:var(--ink-3)}
+
+/* ---------- chips ---------- */
+.chiprow{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--canvas);color:var(--ink-2);text-decoration:none}
+.chip.lob{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+.chip.role{border-left:3px solid var(--c);padding-left:9px;border-radius:5px}
+.chip.role:hover{border-color:var(--c);color:var(--ink);background:var(--fill)}
+.chip.role b{font-size:10.5px;font-weight:600;color:var(--c)}
+
+/* ---------- legend rows ---------- */
+.legend{display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.legend a{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:10px;padding:7px 10px;border:1px solid var(--line-soft);border-radius:5px;background:var(--canvas);text-decoration:none;font-size:13px}
+.legend a:hover{border-color:var(--c);background:var(--surface)}
+.code{font-size:11px;font-weight:600;color:#fff;background:var(--c);border-radius:3px;text-align:center;padding:2px 0;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .code{color:#0B1620}}
+:root[data-theme="dark"] .code{color:#0B1620}
+.legend .n{font-weight:500;overflow:hidden;text-overflow:ellipsis}
+.legend .n small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.legend .m{font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+
+/* ---------- sections ---------- */
+section{padding:40px 0 0}
+.page-head{margin-bottom:12px}
+.page-head h2{font-size:21px;letter-spacing:-.02em;color:var(--brand-deep)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .page-head h2{color:var(--ink)}}
+:root[data-theme="dark"] .page-head h2{color:var(--ink)}
+.page-head p{color:var(--ink-2);font-size:14px;margin:6px 0 0;max-width:74ch}
+.kicker{font-size:12px;color:var(--ink-3);margin-bottom:4px}
+
+.prose p{font-size:14.5px;color:var(--ink-2)}
+.prose p strong{color:var(--ink);font-weight:600}
+.prose mark{background:transparent;color:var(--blue);font-weight:500}
+
+/* ---------- specs ---------- */
+.specs{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(176px,1fr));margin:14px 0}
+.specs .s{border:1px solid var(--line-soft);border-radius:5px;background:var(--canvas);padding:9px 11px}
+.specs .s h4{font-size:13px;margin-bottom:3px}
+.specs .s h4 i{font-style:normal;color:var(--blue)}
+.specs .s p{font-size:12.5px;color:var(--ink-2);line-height:1.45;margin:0}
+
+.annot{border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;margin:12px 0 0}
+.annot .r{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:8px 12px;font-size:13px;background:var(--surface)}
+.annot .r:nth-child(even){background:var(--canvas)}
+.annot .r b{color:var(--blue);font-weight:600;font-size:11.5px;padding-top:2px}
+@media (max-width:560px){.annot .r{grid-template-columns:1fr;gap:2px}}
+
+/* ---------- rails ---------- */
+.rails{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));margin-top:4px}
+.rail{border:1px solid var(--line-soft);border-left:3px solid var(--neg);border-radius:5px;background:var(--canvas);padding:9px 12px}
+.rail h4{font-size:13px;margin-bottom:3px}
+.rail p{font-size:12.5px;color:var(--ink-2);line-height:1.45;margin:0}
+
+/* ---------- crews ---------- */
+.crew{padding-top:44px;scroll-margin-top:72px}
+.crew-head{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start;border-top:3px solid var(--c);padding-top:11px}
+.crew-head .cc{font-size:11.5px;font-weight:600;color:var(--c);margin-bottom:2px}
+.crew-head h2{font-size:21px;letter-spacing:-.02em}
+.crew-head .ct{font-size:11.5px;color:var(--ink-3);text-align:right;line-height:1.5}
+.crew-head .ct b{display:block;font-size:19px;color:var(--c);line-height:1.2}
+.roles{font-size:12.5px;color:var(--ink-3);margin:8px 0 10px;max-width:92ch}
+.crew>.intro{font-size:14.5px;color:var(--ink-2);max-width:76ch}
+
+.moment{margin-top:20px;scroll-margin-top:72px}
+.moment-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:7px}
+.moment-head h3{font-size:14.5px}
+.pill{font-size:10.5px;font-weight:500;line-height:17px;padding:0 8px;border-radius:3px;background:var(--fill);color:var(--ink-2);white-space:nowrap}
+.pill.c{background:var(--blue-soft);color:var(--blue)}
+.moment>.md{font-size:13px;color:var(--ink-3);margin:0 0 9px;max-width:76ch}
+
+/* ---------- prompt card ---------- */
+.prompt{background:var(--surface);border:1px solid var(--line-soft);border-left:3px solid var(--c);border-radius:6px;margin-bottom:9px;overflow:hidden;box-shadow:0 1px 0 rgba(16,24,40,.04)}
+.ptop{display:flex;align-items:center;gap:9px;padding:6px 11px;background:var(--canvas);border-bottom:1px solid var(--line-soft)}
+.pid{font-size:11px;font-weight:600;color:var(--c)}
+.pname{font-size:12.5px;font-weight:500;color:var(--ink-2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy{font-size:11.5px;font-weight:500;color:var(--call);padding:2px 8px;border:1px solid var(--line);border-radius:4px;white-space:nowrap}
+.copy:hover{background:var(--fill)}
+.copy[data-done="1"]{color:var(--pos);border-color:var(--pos)}
+.pbody{font-size:13.5px;line-height:1.62;color:var(--ink);padding:11px 13px 12px;margin:0;white-space:pre-wrap}
+.pbody mark{background:transparent;color:var(--blue);font-weight:500}
+.phint{font-size:12px;color:var(--ink-3);padding:0 13px 10px;margin:-4px 0 0;line-height:1.45}
+.phint b{color:var(--ink-2);font-weight:500}
+
+/* ---------- phases ---------- */
+.phase{display:grid;grid-template-columns:116px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line-soft)}
+.phase:first-child{border-top:1px solid var(--line)}
+.phase .w{font-size:13.5px;font-weight:600}
+.phase .w small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px;margin-top:2px}
+.phase h3{font-size:14.5px;margin-bottom:4px}
+.phase p{font-size:13.5px;color:var(--ink-2);margin-bottom:6px}
+.phase ul{margin:0;padding-left:17px;font-size:13.5px;color:var(--ink-2)}
+.phase li{margin-bottom:3px}
+@media (max-width:620px){.phase{grid-template-columns:1fr;gap:6px}}
+
+/* ---------- measures ---------- */
+.meas{border-top:1px solid var(--line)}
+.meas .m{display:grid;grid-template-columns:1fr 190px;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.meas h4{font-size:13.5px;margin-bottom:2px}
+.meas p{font-size:13px;color:var(--ink-2);margin:0}
+.tgt{font-size:12px;font-weight:500;color:var(--pos);background:var(--pos-soft);border-radius:3px;padding:2px 9px;justify-self:end;white-space:nowrap}
+@media (max-width:620px){.meas .m{grid-template-columns:1fr}.tgt{justify-self:start}}
+
+.watch{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:14px}
+.watch .w{border:1px solid var(--line-soft);border-left:3px solid var(--warn);border-radius:5px;background:var(--warn-soft);padding:9px 12px}
+.watch h4{font-size:13px;margin-bottom:3px}
+.watch p{font-size:12.5px;color:var(--ink-2);margin:0;line-height:1.45}
+
+.rubric{counter-reset:r;list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.rubric li{counter-increment:r;display:grid;grid-template-columns:24px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px;color:var(--ink-2)}
+.rubric li::before{content:counter(r);font-size:12px;font-weight:600;color:var(--blue)}
+
+footer{margin-top:52px;border-top:1px solid var(--line);padding:18px 0 48px;font-size:12.5px;color:var(--ink-3)}
+footer p{max-width:86ch;font-size:12.5px;margin-bottom:.5rem}
+
+.hidden{display:none!important}
+#noresult{display:none;font-size:13.5px;color:var(--ink-3);padding:30px 0}
+
+@media print{
+  .bar{display:none}.copy{display:none}
+  body{background:#fff;font-size:10.5pt}
+  .prompt,.phase,.rail{break-inside:avoid}
+  section{padding-top:18px}
+}
+/* ---------- hero jump links ---------- */
+.jump{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px}
+.jump a{font-size:13px;color:var(--blue);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+.jump a:hover{border-bottom-color:var(--blue)}
+
+/* ---------- find your team ---------- */
+.find label{display:block;font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+#find{width:100%;font:inherit;font-size:15px;padding:11px 14px;border:1px solid var(--line);border-radius:7px;background:var(--canvas);color:var(--ink)}
+#find:focus{border-color:var(--blue);background:var(--surface)}
+#find::placeholder{color:var(--ink-3)}
+#findres{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+#findres a{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line-soft);border-left:3px solid var(--c);border-radius:5px;background:var(--canvas);text-decoration:none;font-size:13.5px}
+#findres a:hover{border-color:var(--c);background:var(--surface)}
+#findres .tm{font-size:12px;color:var(--ink-3);white-space:nowrap}
+#findmiss{font-size:13px;color:var(--ink-3);padding:8px 2px}
+.findfoot{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;margin-top:10px;font-size:12.5px;color:var(--ink-3)}
+.linkbtn{font-size:12.5px;color:var(--blue);border-bottom:1px solid var(--line);padding:0;border-radius:0}
+.linkbtn:hover{border-bottom-color:var(--blue)}
+#alltitles{display:none;margin-top:12px;border-top:1px solid var(--line-soft);padding-top:12px}
+#alltitles.open{display:block}
+.tgroup{margin-bottom:11px}
+.tgroup h4{font-size:11.5px;color:var(--c);margin-bottom:5px;font-weight:600}
+
+/* ---------- team directory ---------- */
+.band{margin-top:20px}
+.band:first-child{margin-top:0}
+.band-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:8px}
+.band-head h3{font-size:13.5px}
+.band-head span{font-size:12.5px;color:var(--ink-3)}
+.dir{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.dir a{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:9px 11px;border:1px solid var(--line-soft);border-left:3px solid var(--c);border-radius:5px;background:var(--canvas);text-decoration:none}
+.dir a:hover{border-color:var(--c);background:var(--surface)}
+.dir .nm{font-size:13.5px;font-weight:500;line-height:1.3}
+.dir .ds{display:block;font-size:12px;color:var(--ink-3);font-weight:400;margin-top:1px}
+.dir .ct2{font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+
+/* ---------- section divider inside the teams flow ---------- */
+.divider{margin:46px 0 0;padding-top:16px;border-top:2px solid var(--line)}
+.divider .dl{font-size:11.5px;color:var(--ink-3);margin-bottom:3px}
+.divider h2{font-size:24px;letter-spacing:-.02em;color:var(--brand-deep)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .divider h2{color:var(--ink)}}
+:root[data-theme="dark"] .divider h2{color:var(--ink)}
+.divider p{font-size:13.5px;color:var(--ink-2);margin:5px 0 0}
+
+/* ---------- role chips inside a team ---------- */
+.rolechips{display:flex;flex-wrap:wrap;gap:5px;margin:9px 0 12px}
+.rolechips span{font-size:11.5px;color:var(--ink-2);border:1px solid var(--line-soft);border-radius:999px;padding:2px 10px;background:var(--canvas)}
+
+/* ---------- back to top ---------- */
+#top{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;font-size:12px;font-weight:500;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 15px;box-shadow:0 2px 10px rgba(16,24,40,.14);opacity:0;pointer-events:none;transition:opacity .18s ease}
+#top.show{opacity:1;pointer-events:auto}
+#top:hover{color:var(--ink);border-color:var(--ink-3)}
+@media (prefers-reduced-motion: reduce){#top{transition:none}}
+@media print{#top,.jump,.find,#alltitles{display:none}}
+
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="bar-in">
+    <span class="mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1.6 18.6 17H14L10 9.4 6 17H1.4L10 1.6Z" fill="#00AEEF"/><path d="M10 11.2 13 17H7l3-5.8Z" fill="#fff"/></svg></span>
+    <h1>Copilot Guidebook<small>Al-Futtaim Retail</small></h1>
+    <input id="search" type="search" placeholder="Search 73 prompts. Try: rota, lease, hiring, Arabic" aria-label="Search prompts">
+    <div class="seg"><button id="themebtn" type="button">Dark</button></div>
+  </div>
+</div>
+
+<button id="top" type="button">Back to top</button>
+
+<div class="page">
+
+<div class="head">
+  <div class="eyebrow">Retail Transformation Office &nbsp;·&nbsp; Version 2.1 &nbsp;·&nbsp; October 2026</div>
+  <h2 class="title">One guide for every team.</h2>
+  <p class="lede">How to use Copilot in the work you already do. Find your team, pick two prompts, and change the words in brackets. That is all there is to it.</p>
+  <div class="jump">
+    <a href="#how">How to use this guide</a>
+    <a href="#rails">The ten rules</a>
+    <a href="#teams">All twelve teams</a>
+    <a href="#rollout">Getting started</a>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">12</div><div class="t">Teams</div></div>
+    <div class="kpi"><div class="v">73</div><div class="t">Ready-made prompts</div></div>
+    <div class="kpi"><div class="v">66</div><div class="t">Tasks in your week</div></div>
+    <div class="kpi"><div class="v">8</div><div class="t">Businesses covered</div></div>
+  </div>
+</div>
+
+<section id="find" style="padding-top:34px">
+  <div class="card find">
+    <div class="card-head"><h3>Start here</h3><span>Takes about five seconds</span></div>
+    <label for="find">Type your job title, or part of it</label>
+    <input id="find" type="search" placeholder="For example: store manager, buyer, leasing, HR" autocomplete="off">
+    <div id="findres"></div>
+    <div id="findmiss" style="display:none"></div>
+    <div class="findfoot">
+      <span>Cannot see your title?</span>
+      <button class="linkbtn" id="toggletitles" type="button">Show all 74 job titles</button>
+      <span>or browse the teams below.</span>
+    </div>
+    <div id="alltitles"></div>
+  </div>
+</section>
+
+<section id="teams">
+  <div class="page-head">
+    <div class="kicker">Browse</div>
+    <h2>The twelve teams</h2>
+    <p>Grouped three ways. Not every business has all twelve — use the ones you have. If your job title is not listed, pick the team that matches what your week actually looks like.</p>
+  </div>
+  <div id="dir"></div>
+</section>
+
+<section id="how">
+  <div class="page-head">
+    <div class="kicker">Read this first</div>
+    <h2>How to use this guide</h2>
+    <p>This guide is about work you already do. It does not ask you to find extra time. Each prompt is linked to a task that already happens — the Monday review, the pre-open, month end, the renewal date, the interview.</p>
+  </div>
+
+  <div class="card prose">
+    <p><strong>Pick two prompts. Just two.</strong> Choose two that match tasks you do every week. Use them every time that task comes round, for three weeks. Two prompts you use often help far more than twenty you try once.</p>
+    <p><strong>Change the words in brackets.</strong> Anything in <mark>[brackets]</mark> is for you to replace with your brand, your category, your store, your file names. Once a prompt works twice, rewrite it in your own words and save your version.</p>
+    <p style="margin-bottom:0"><strong>Always check the answer.</strong> Copilot is fast. It is not always right. Every prompt here tells Copilot to say when it cannot find something. Read that part first.</p>
+  </div>
+
+  <div class="card" style="margin-top:10px">
+    <div class="card-head"><h3>Words used in this guide</h3></div>
+    <div class="annot">
+      <div class="r"><b>Prompt</b><div>What you type into Copilot. Every prompt here is ready to copy.</div></div>
+      <div class="r"><b>Source</b><div>The file, email, chat or meeting you tell Copilot to read. Without one, it will make things up.</div></div>
+      <div class="r"><b>Task</b><div>Something you already do at a set time. Each prompt belongs to one.</div></div>
+      <div class="r"><b>Agent</b><div>A prompt that has been set up to run on its own, so nobody has to remember it.</div></div>
+      <div class="r"><b>SPECS</b><div>The five parts of a good prompt. Explained below.</div></div>
+    </div>
+  </div>
+
+  <div class="page-head" style="margin-top:30px">
+    <div class="kicker">How to write a prompt</div>
+    <h2>SPECS: five parts, every time</h2>
+    <p>If an answer is not useful, one of these five is usually missing.</p>
+  </div>
+  <div class="specs">
+    <div class="s"><h4><i>S</i>ituation</h4><p>What you are doing, and when.</p></div>
+    <div class="s"><h4><i>P</i>urpose</h4><p>What you need the answer for.</p></div>
+    <div class="s"><h4><i>E</i>vidence</h4><p>Which files or emails Copilot should read.</p></div>
+    <div class="s"><h4><i>C</i>onstraints</h4><p>The rules. How long, which language, what to leave out.</p></div>
+    <div class="s"><h4><i>S</i>hape</h4><p>What the answer should look like. A table. Six bullets. 120 words.</p></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><h3>One prompt, split into its five parts</h3><span>A weekly category review, in any business</span></div>
+    <div class="annot">
+      <div class="r"><b>Situation</b><div>I am going to the weekly category review for [category] in [brand].</div></div>
+      <div class="r"><b>Evidence</b><div>Read the sell-through report /[file] and last week's notes /[file].</div></div>
+      <div class="r"><b>Purpose</b><div>I need to know which five lines to defend and which five to question.</div></div>
+      <div class="r"><b>Constraints</b><div>Use only numbers in the file. If the file does not show the reason, write "not in the file". Do not guess.</div></div>
+      <div class="r"><b>Shape</b><div>One table: SKU, name, change vs last week, weeks of cover, reason, what I should do. One page only.</div></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-3);margin:10px 0 0">All the prompts in this guide are written this way. The Constraints part is what stops bad answers.</p>
+  </div>
+</section>
+
+<section id="rails">
+  <div class="page-head">
+    <div class="kicker">Must follow</div>
+    <h2>Ten rules</h2>
+    <p>Short, so you can remember them on a shop floor or in a meeting. These are set centrally. A business cannot change them.</p>
+  </div>
+  <div class="rails">
+    <div class="rail"><h4>Always give it a source</h4><p>Tell Copilot which file, email or chat to read. If you do not, it will write something that sounds right but is not.</p></div>
+    <div class="rail"><h4>If you can see it, Copilot can see it</h4><p>Copilot can open anything you have access to. That includes files someone shared by mistake. If you see something you should not, tell your manager. Do not use it.</p></div>
+    <div class="rail"><h4>Partner brand rules come first</h4><p>IKEA, Inditex, M&amp;S, Toys R Us and other partner brands have their own rules about data, words and designs. If their rules say no, the answer is no.</p></div>
+    <div class="rail"><h4>Keep costs and contracts inside</h4><p>Never paste cost prices, supplier terms, contracts, leases, colleague details or customer data into a public AI tool. Use the work version of Copilot only.</p></div>
+    <div class="rail"><h4>Copilot is not a lawyer</h4><p>It can find what we said and when. It cannot tell you what a lease, contract or policy clause means. Send those questions to Legal.</p></div>
+    <div class="rail"><h4>People data stays in HR systems</h4><p>Pay, performance ratings, case notes and personal details about a colleague go in work Copilot only, and are stored where HR records are kept. Never anywhere else.</p></div>
+    <div class="rail"><h4>Check every number</h4><p>Copilot can get sums wrong. Check any number against the real system before it goes into a pack, a report or an email outside your team.</p></div>
+    <div class="rail"><h4>Arabic needs a person</h4><p>Someone who speaks Arabic must read any Arabic text before a customer sees it. A back-translation is a check, not an approval.</p></div>
+    <div class="rail"><h4>You own what you send</h4><p>Read anything before it goes to a customer, a supplier, a landlord, a candidate or the whole business. Copilot writes the draft. You send it.</p></div>
+    <div class="rail"><h4>Say when you used it</h4><p>If Copilot wrote most of a document other people will rely on, write that in the document.</p></div>
+  </div>
+</section>
+
+<div id="crews"></div>
+<div id="noresult">Nothing matches that. Clear the search to see all 73 prompts.</div>
+
+<section id="rollout">
+  <div class="page-head">
+    <div class="kicker">Getting started</div>
+    <h2>The first 90 days, with no new meetings</h2>
+    <p>Guides usually get launched, then forgotten. This plan adds nothing to anyone's calendar. Every check-in happens inside a meeting you already have. Start with one business. Do not start all eight at once.</p>
+  </div>
+  <div>
+    <div class="phase"><div class="w">Days 0–14<small>Start</small></div><div>
+      <h3>Each team picks two prompts and names the meeting they belong to</h3>
+      <p>The team champion reads their section, picks two prompts, and writes down which existing meeting or routine each one belongs to. One line per prompt, pinned in the team's Teams channel.</p>
+      <ul>
+        <li>Name one champion for each team you actually have. Not every business has all twelve.</li>
+        <li>Champions try their two prompts on real work before anyone else sees the guide.</li>
+        <li>If a prompt does not work for the champion, remove it now.</li>
+      </ul>
+    </div></div>
+    <div class="phase"><div class="w">Days 15–45<small>Use</small></div><div>
+      <h3>Use your two prompts every time the task comes round</h3>
+      <p>Doing the same prompt nine times teaches you more than trying nine prompts once.</p>
+      <ul>
+        <li>Take 15 minutes at the end of a meeting you already have. One person shows a prompt that gave a bad answer. The team fixes it together using SPECS.</li>
+        <li>Talk about what went wrong, not only what went well. That is where the learning is.</li>
+        <li>Champions write down which prompts people keep using, and which were tried once and dropped.</li>
+      </ul>
+    </div></div>
+    <div class="phase"><div class="w">Days 46–75<small>Build</small></div><div>
+      <h3>Anything three people keep using gets built properly</h3>
+      <p>If three or more people have used a prompt for three weeks running, it is worth setting up properly.</p>
+      <ul>
+        <li>Pin it in the team's Copilot workspace so nobody has to type it again.</li>
+        <li>If the files and the format never change, build it as an agent. Then it runs without anyone remembering.</li>
+        <li>If a prompt needs data we do not have, that is a data problem, not a prompt problem. Write it down and send it to the platform team.</li>
+      </ul>
+    </div></div>
+    <div class="phase"><div class="w">Days 76–90<small>Hand over</small></div><div>
+      <h3>Team leaders take over, and the next business starts</h3>
+      <p>The guide stops being a project and becomes a working document the business owns.</p>
+      <ul>
+        <li>Each team leader owns their section. They can delete prompts nobody uses.</li>
+        <li>One version number, one owner, one review every three months.</li>
+        <li>New starters get their team's two prompts in week one. Do not send them the whole guide.</li>
+        <li>Write down what worked and what did not before the second business starts.</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<section id="measure">
+  <div class="page-head">
+    <div class="kicker">Measuring it</div>
+    <h2>How we know it is working</h2>
+    <p>Counting licences and messages tells you nothing about whether work got better. These five tell you something.</p>
+  </div>
+  <div class="meas">
+    <div class="m"><div><h4>How many tasks are covered</h4><p>How many of the 66 tasks in this guide have someone actually doing them with Copilot.</p></div><span class="tgt">70% by day 90</span></div>
+    <div class="m"><div><h4>How many prompts people keep using</h4><p>Prompts used three weeks in a row. This is the only measure that shows a prompt really fits the work.</p></div><span class="tgt">Above 40%</span></div>
+    <div class="m"><div><h4>Time saved, task by task</h4><p>Ask once a month about one named task. Do not ask people how much time Copilot saved them in general, because they will guess.</p></div><span class="tgt">First measure at day 15</span></div>
+    <div class="m"><div><h4>How many edits before it is usable</h4><p>If this number is not going down, the prompt is wrong, not the person.</p></div><span class="tgt">Lower each month</span></div>
+    <div class="m"><div><h4>Prompts built properly</h4><p>Prompts turned into pinned prompts or agents. This is where the time saving adds up.</p></div><span class="tgt">8 or more per business</span></div>
+  </div>
+  <div class="watch">
+    <div class="w"><h4>Clever prompts nobody repeats</h4><p>People share impressive prompts in channels and never use them again. Check how often a prompt is reused, not how many likes it got.</p></div>
+    <div class="w"><h4>Only one person using it</h4><p>One keen person in a team of eight doing all the work. That is not adoption. It is a single point of failure.</p></div>
+    <div class="w"><h4>Sending without reading</h4><p>Answers going out with no human check. The first wrong number that reaches a supplier, a landlord or a candidate sets us back a year.</p></div>
+    <div class="w"><h4>Counting licences</h4><p>If progress is ever reported as how many people have Copilot, we are measuring the wrong thing.</p></div>
+  </div>
+</section>
+
+<section id="rubric">
+  <div class="page-head">
+    <div class="kicker">Keeping it useful</div>
+    <h2>Adding your own prompts</h2>
+    <p>Teams will write their own prompts, and they should. Add a prompt to this guide when all six of these are true.</p>
+  </div>
+  <ol class="rubric">
+    <li>It is for a task that already happens in someone's week.</li>
+    <li>It tells Copilot which file, email, chat or meeting to read.</li>
+    <li>It says what the answer should look like, clearly enough that two people would get a similar result.</li>
+    <li>It tells Copilot what to do when the files do not have the answer.</li>
+    <li>Someone other than the writer has used it on their own work and got something useful.</li>
+    <li>It is faster than doing the task by hand. Time it once. Do not assume.</li>
+  </ol>
+  <p style="font-size:13.5px;color:var(--ink-2);margin-top:14px">Prompts nobody uses are deleted at the three-month review. A guide that only gets longer is a guide nobody reads.</p>
+</section>
+
+<footer>
+  <p><strong style="color:var(--ink-2)">Copilot Guidebook — Al-Futtaim Retail.</strong> Version 2.1, October 2026. Written for Microsoft 365 Copilot. The way the prompts are built will work with any work assistant that can read the same files.</p>
+  <p>The twelve teams cover store, trading and corporate roles across M&amp;S Fashion &amp; Food, AF Fashion, Ace, Watsons, Toys R Us, AFWJ, Inditex and IKEA. Team leaders can add, change and delete prompts in their own section. The ten rules are set centrally and cannot be changed locally. If a partner brand agreement says something different, the agreement wins. Nothing in this guide is legal, tax or employment advice.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var GROUPS = {
+    trade:{label:"Group 1", name:"Stores and trading", note:"The teams that buy, plan, move and sell the product."},
+    corp:{label:"Group 2", name:"Corporate functions", note:"The teams that support the whole business."},
+    lead:{label:"Group 3", name:"Leaders, and everyone", note:"For people running a business, plus six prompts that work for all of us."}
+  };
+
+  var ROLES = [
+    ["Head of Retail Operations","SO"],["Area / Cluster Manager","SO"],["Senior Store Manager","SO"],
+    ["Store Manager","SO"],["Assistant Store Manager","SO"],["Department Manager","SO"],
+    ["Section Supervisor","SO"],["Store Operations Manager","SO"],
+
+    ["Head of Commercial","CB"],["Category Manager","CB"],["Commercial Department Manager","CB"],
+    ["Senior Buyer","CB"],["Buyer","CB"],["Assistant Buyer","CB"],["Private Label & Sourcing Manager","CB"],
+
+    ["Head of Planning","PI"],["Senior Planner","PI"],["Merchandise Planner","PI"],
+    ["Demand & Supply Planner","PI"],["Allocator","PI"],["Inventory Manager","PI"],["Master Data Team Lead","PI"],
+
+    ["Head of Marketing","MC"],["Marketing Manager","MC"],["Brand & Campaign Manager","MC"],
+    ["CRM & Loyalty Manager","MC"],["Graphic Communications Manager","MC"],["Graphic & Web Designer","MC"],
+    ["Graphic Designer","MC"],["Content & Arabic Translation Executive","MC"],["Visual Merchandising Manager","MC"],
+
+    ["Head of E-commerce","DF"],["Senior Manager E-commerce","DF"],["Senior Online Merchandiser","DF"],
+    ["Digital Trading Manager","DF"],["Customer Service Manager","DF"],["Last Mile Delivery Manager","DF"],
+    ["Logistics Manager","DF"],["Distribution Centre Manager","DF"],
+
+    ["Head of HR","HR"],["Senior HR Business Partner","HR"],["HR Business Partner","HR"],
+    ["Junior HR Business Partner","HR"],["Employee Relations Manager","HR"],
+
+    ["Head of Talent Acquisition","TA"],["Talent Acquisition Manager","TA"],
+    ["Recruiter","TA"],["Recruitment Coordinator","TA"],
+
+    ["Head of Learning & Development","LD"],["Learning & Development Manager","LD"],
+    ["Training Manager","LD"],["Retail Academy Lead","LD"],
+
+    ["Head of Finance","FI"],["Finance Business Partner","FI"],["Commercial Finance Manager","FI"],
+    ["Financial Controller","FI"],["FP&A Analyst","FI"],["Accounts Payable & Receivable Lead","FI"],
+    ["Process & Compliance Manager","FI"],["Loss Prevention Manager","FI"],
+
+    ["Head of Leasing","LE"],["Leasing Manager","LE"],["Lease Administration Executive","LE"],
+    ["Store Development Manager","LE"],["Facilities Manager","LE"],
+
+    ["Executive Assistant","EA"],["Senior Executive Assistant","EA"],["Administrative Assistant","EA"],
+    ["Regional Admin Manager","EA"],["Office Manager","EA"],["PMO Coordinator","EA"],
+
+    ["Managing Director / General Manager","LF"],["Transformation Lead","LF"],["Strategy Manager","LF"]
+  ];
+
+  var CREWS = [
+    {
+      code:"SO", v:"--so", g:"trade", name:"Store Operations", short:"Running a store day to day",
+      also:"shop floor, rota, huddle, handover, shrink, mystery shop",
+      intro:"This is the biggest team in every business, and the hardest to reach. You are on the shop floor, often on a phone, usually in the middle of something else. Every prompt here is short and has a word limit, so the answer can be read standing up. If a prompt needs you to sit at a desk, it will not get used.",
+      moments:[
+        {t:"Before opening", c:"Daily",
+         d:"Fifteen minutes before the doors open. One brief, one huddle script, nothing more.",
+         p:[
+           {id:"SO-01", n:"Five-minute brief", hint:"The word limit does real work. Without it this comes back as a full page and gets skipped.",
+            b:"Give me my pre-open brief for [store]. Read /[yesterday's sales report] and /[today's task and delivery list].\n\nTell me:\n- How we did yesterday against target, in one line\n- The three departments that missed\n- Today's deliveries\n- Who is off today\n- The one thing to tell the team at huddle\n\nUnder 120 words. Plain sentences. No tables and no headings.\n\nIf something is missing from the files, say which one."},
+           {id:"SO-02", n:"Huddle script", hint:"Ask for it <b>the way you would say it out loud</b>. Written-English scripts sound wrong and get dropped.",
+            b:"Turn this into a 90-second huddle script for my [n]-person shift: [paste the pre-open brief].\n\nInclude:\n- One sentence on how we did\n- One number the team can change today\n- Two actions, one for each department\n- One thank you for [name] for [what they did]\n\nWrite it the way I would say it out loud. Short sentences. No business words."}
+         ]},
+        {t:"Shift handover", c:"Daily",
+         d:"Six bullets that stop the evening manager finding this morning's problem at seven o'clock.",
+         p:[{id:"SO-03", n:"Handover note", hint:"Adding the store Teams channel catches things you forgot you dealt with.",
+            b:"Write my handover note for the evening shift at [store]. Use my notes below and today's messages in the [store] Teams channel.\n\nCover:\n- What happened\n- What is not finished\n- What the evening manager must not miss\n- Any customer problem still open\n\nSix bullets maximum. One sentence each. Put urgent things first.\n\nMy notes: [paste]"}]},
+        {t:"Weekly trade call", c:"Weekly",
+         d:"The call with your Area Manager. Answer in the order the call runs and you will not be caught out.",
+         p:[{id:"SO-04", n:"Trade call prep", hint:"<b>Whether it is fixed</b> is the question that always comes up and nobody prepares for.",
+            b:"Get me ready for this week's trade call with [Area Manager or Head of Operations]. Read /[store weekly report] and the same report for the last three weeks.\n\nAnswer in this order:\n1. How my store did on sales, average basket, conversion, units per sale and shrink\n2. Which departments caused the change\n3. What I said I would fix last week, and whether it is fixed\n4. The two things I need help with\n\nIf a number is missing from the files, say so. Do not guess."}]},
+        {t:"Rota and cover", c:"Weekly",
+         d:"A draft rota is a starting point. The useful part is the list of rules it could not follow.",
+         p:[{id:"SO-05", n:"Draft rota", hint:"The second half — <b>every rule it could not follow</b> — is where the real gaps show up.",
+            b:"Build a draft rota for [store] for the week starting [date]. Read /[availability file] and /[trading hours and footfall file].\n\nRules:\n- Most people on the floor during [busy hours and days]\n- At least one trained person in each department at all times\n- Nobody works more than [x] days in a row\n- Follow the availability file exactly\n- Include prayer and break times\n\nGive me the rota as a grid. Then list every rule you could not follow, which shift it affects, and why.\n\nNever move someone the availability file says is not available, even if it would fix a gap."}]},
+        {t:"Customer complaint", c:"As needed",
+         d:"Check the policy first, write second. In that order, or you will promise something we cannot do.",
+         p:[{id:"SO-06", n:"Complaint reply", hint:"The last line is on purpose. A reply written from half the facts is worse than no reply yet.",
+            b:"I need to reply to a customer complaint.\n\nWhat happened: [what happened, dates, what we have already done, what the customer wants].\n\nFirst, read /[returns, exchange and warranty policy] and tell me what we are allowed to offer. Do this before writing anything.\n\nThen write a reply that:\n- Mentions the exact problem\n- Says what we will do and by when\n- Offers nothing outside the policy\n\nUnder 150 words. Friendly, but do not admit fault we have not confirmed.\n\nIf I have not given you enough information, tell me what is missing instead of writing the reply."}]},
+        {t:"Coaching a colleague", c:"Monthly",
+         d:"A conversation that goes badly if you make it up as you go, and well if the first three sentences are ready.",
+         p:[{id:"SO-07", n:"Coaching prep", hint:"<b>Actions, not personality</b> keeps the conversation calm. Ask for it clearly.",
+            b:"Help me prepare a conversation with [name], a [role] in my store, about [the behaviour or performance point].\n\nGive me:\n- The first sentence\n- Three things I have noticed, described as actions and not personality\n- Two questions that get them talking instead of defending themselves\n- What good would look like in 30 days\n\nDo not write their answers. Half a page maximum.\n\nIf this sounds like a discipline or policy matter rather than coaching, say so and stop."}]},
+        {t:"Monthly store review", c:"Monthly",
+         d:"One pack, five parts, three requests. The slide plan at the end saves an evening.",
+         p:[{id:"SO-08", n:"Store review pack", hint:"Give the slide plan straight to the PowerPoint agent instead of building slides by hand.",
+            b:"Build my monthly store review pack for [store]. Read /[store P&L], /[mystery shop results] and /[people and attendance file].\n\nFive parts: trade, people, customer, operations, and my three requests. Four bullets each, with a number where the file gives one.\n\nThen give me a slide plan, one headline and three points per slide, that I can give to the PowerPoint agent.\n\nOnly use numbers from the files. Write \"not in the file\" where a number is missing."}]}
+      ]
+    },
+    {
+      code:"CB", v:"--cb", g:"trade", name:"Commercial & Buying", short:"Buying and supplier negotiation",
+      also:"range, sell-through, trading terms, supplier, category",
+      intro:"This team spends the week on three things: looking at what sold, deciding what to buy next, and negotiating with suppliers and partner brands. Copilot helps most with the first and the third. Pulling a year of supplier emails into one brief is something nobody has time to do by hand. It is not good at the buying decision itself, so none of these prompts makes one for you.",
+      moments:[
+        {t:"Weekly category review", c:"Weekly",
+         d:"The one meeting where the numbers get questioned. Walk in already knowing which lines to defend and which to challenge.",
+         p:[{id:"CB-01", n:"Read the sell-through", hint:"The last line matters most. Without it, Copilot will invent a reason for every slow line.",
+            b:"I am going to the weekly category review for [category] in [brand]. Read the sell-through report /[file] and last week's notes /[file].\n\nGive me:\n1. The five lines selling fastest this week compared to last week.\n2. The five lines selling slowest.\n3. For each slow line, the likely reason. Choose from: low stock, price change, promotion ended, or missing sizes and colours.\n4. Any line with more than [X] weeks of stock cover.\n\nPut it in one table: SKU, name, change vs last week, weeks of cover, reason, what I should do. One page only.\n\nIf the file does not show the reason, write \"not in the file\". Do not guess any number."}]},
+        {t:"Supplier or partner brand meeting", c:"As needed",
+         d:"A year of promises sitting in email, Teams and meeting notes. This is the most useful prompt in the team.",
+         p:[{id:"CB-02", n:"Meeting brief", hint:"Asking for <b>the date and the message</b> turns a summary into something you can quote in the room.",
+            b:"I have a meeting about trading terms with [supplier or partner brand] on [date].\n\nSearch my email, Teams chats, meetings and files from the last 12 months with them. Give me:\n\n1. A list in date order of what we agreed, changed or argued about.\n2. Every promise each side made. Show the date and which message it came from.\n3. Things we never finished.\n4. The three arguments they are most likely to use against us. Use only things they have actually said before.\n\nMark clearly anything you worked out yourself rather than found.\n\nOne page. Then add the five questions I should ask first."}]},
+        {t:"Looking at a new range", c:"As needed",
+         d:"Supplier presentations are built to make the decision for you. This prompt refuses to decide, on purpose.",
+         p:[{id:"CB-03", n:"New range check", hint:"<b>Do not tell me what to decide</b> keeps the judgement with you and makes the answer more useful, not less.",
+            b:"I am looking at [product, brand or range] for [category] in [brand]. Read /[supplier presentation] and /[current range file].\n\nGive me:\n1. Where this would sit next to what we already sell, and what it would take sales from.\n2. What gaps it fills that we do not cover today.\n3. Eight questions I must ask the supplier before I agree. Cover landed cost, minimum order, lead time, warranty or after-sales, UAE and GCC rules, and any partner brand approval needed.\n4. What I still need from our own systems.\n\nPut the reasons to say yes and the reasons to say no in two columns.\n\nDo not tell me what to decide."}]},
+        {t:"Monthly trading pack", c:"Monthly",
+         d:"The comments nobody has time to write. Written in the same style as last month, so the pack reads the same way.",
+         p:[{id:"CB-04", n:"Pack comments", hint:"Giving it last month's pack works better than describing the style you want.",
+            b:"Write the comments section of my monthly category pack for [category]. Read /[this month's performance file] and /[last month's pack].\n\nSix short paragraphs:\n1. How we did against plan.\n2. Why.\n3. Range changes this month.\n4. Supplier or partner problems.\n5. Risks for next month.\n6. What I need from Operations.\n\nUse the same style and the same order as last month's pack. Only use numbers from the files, and name the sheet each number came from. If a section has no data this month, say so."}]},
+        {t:"Chasing suppliers", c:"Daily",
+         d:"Ten minutes at the end of the day stops things sitting in the inbox for three weeks.",
+         p:[{id:"CB-05", n:"Who owes what", hint:"Use this in Outlook, not in chat. It can read the whole inbox, not just one thread.",
+            b:"Look at my inbox for the last 10 days. Find every supplier or partner email where I owe them a reply, or they owe me something. Group by company. For each one, show how long it has been waiting and one line on what is missing.\n\nThen write a short, polite reminder for each one where they owe me. Mention what I asked for and when. Leave them as drafts for me to check.\n\nPut anything I am holding up at the top of the list. Do not write a reminder for those."}]}
+      ]
+    },
+    {
+      code:"PI", v:"--pi", g:"trade", name:"Planning, Inventory & Data", short:"Forecasts, stock and data quality",
+      also:"replenishment, exception, markdown, ageing stock, S&OP, allocation",
+      intro:"This team holds the numbers everyone else argues about. Most of the week is sorting through exceptions. A few times a year, a small number of assumptions matter a lot. Copilot helps with the sorting, and with showing what we assumed last year before we repeat the same mistake. It should never build the forecast.",
+      moments:[
+        {t:"Weekly exception sort", c:"Weekly",
+         d:"The exception report arrives and it is 400 lines. Sorting it by cause and owner is most of the work.",
+         p:[{id:"PI-01", n:"Sort and send exceptions", hint:"Ending with four Teams messages means the sorting actually leaves your screen.",
+            b:"Here is this week's exception report /[file]. Put the exceptions into four groups:\n\n1. Supplier or delivery delays\n2. Forecast errors\n3. Store or data problems\n4. Real changes in demand\n\nFor each group, give the number of lines, the top five by value, and the one person or team who should fix it.\n\nThen write four short Teams messages, one for each owner. Say what to do and by when.\n\nDo not mix the groups. Do not add lines that are not in the file. List separately anything you could not place."}]},
+        {t:"Season and event forecast", c:"Seasonal",
+         d:"Ramadan and Eid, Dubai Shopping Festival, White Friday, back to school, summer. Each one repeats a forecast we already got partly wrong.",
+         p:[{id:"PI-02", n:"Check last year's assumptions", hint:"<b>Do not give me any forecast numbers.</b> This is for writing down assumptions before anyone opens the model.",
+            b:"I am building the forecast for [season or event] for [category] in [brand]. Read /[last year's actuals] and /[this year's promotion and trading calendar].\n\nGive me:\n1. What last year's plan assumed, and which of those assumptions turned out true.\n2. The three biggest mistakes last year by value, and what we said caused them at the time.\n3. What is different this year: dates, how long it runs, other events at the same time, school and holiday timing.\n4. A checklist of the assumptions I now need to write down.\n\nDo not give me any forecast numbers."}]},
+        {t:"Old stock and markdowns", c:"Monthly",
+         d:"Telling dead stock apart from seasonal stock is a judgement call. Make Copilot show the rule it used.",
+         p:[{id:"PI-03", n:"Markdown list", hint:"Asking for <b>the rule it used</b> lets you argue with the rule instead of the whole list.",
+            b:"Read /[ageing stock report]. Build a markdown list for [category] in [brand].\n\nSort by value at risk. For each line show weeks on hand, last delivery date, last sale date and weeks of cover.\n\nSplit the list in two: stock that will never sell, and stock that is seasonal and will sell again. Tell me the rule you used to split them, so I can check it.\n\nGive it as a table I can paste into Excel. Then three bullets on what these lines have in common."}]},
+        {t:"Data quality check", c:"Weekly",
+         d:"Bad item set-up causes a surprising amount of everything else in this section.",
+         p:[{id:"PI-04", n:"Check against the rules", hint:"Grouping by who created the record turns a data report into a coaching list.",
+            b:"Compare the new item records in /[file] against our data rules in /[standards document].\n\nList every record that breaks a rule. For each one show: the record, the rule it breaks, what it says now, and what it should say.\n\nGroup them by the person who created the record.\n\nIf a rule is unclear or does not cover the case, list it separately. Do not guess."}]},
+        {t:"S&OP input", c:"Monthly",
+         d:"One page for the meeting. Written once, not pulled together from four files the night before.",
+         p:[{id:"PI-05", n:"Meeting input page", hint:"Adding &ldquo;no introduction&rdquo; is worth doing on almost every prompt in this guide.",
+            b:"Write my one-page input for this month's S&OP meeting. Read /[my planning file] and /[last S&OP minutes].\n\nFour parts:\n1. Service level against target\n2. Stock value against target\n3. Three supply risks for the next 90 days, each with how likely it is and how big the impact would be\n4. The two decisions I need from the meeting\n\nAlso say whether each action I promised last time is done, started or not started. Use the minutes and my file. Do not guess.\n\nOne page. No introduction and no summary at the end."}]}
+      ]
+    },
+    {
+      code:"MC", v:"--mc", g:"trade", name:"Marketing, Visual & Content", short:"Campaigns, design, Arabic copy and VM",
+      also:"brief, campaign, social, translation, visual merchandising, CRM",
+      intro:"This team loses time in two places. First, turning a vague request from Commercial into something a designer can work from. Second, sorting out feedback that arrives from four places and contradicts itself. Both are writing problems, and Copilot is good at those. Nothing here makes artwork. Design stays with designers, and partner brand rules stay with the brand.",
+      moments:[
+        {t:"A request comes in", c:"As needed",
+         d:"Commercial send a request. It is never a brief. This turns it into one and lists what is still missing.",
+         p:[{id:"MC-01", n:"Turn a request into a brief", hint:"The five missing questions at the end save the week usually lost going back and forth.",
+            b:"Commercial have asked for help with [campaign or promotion] for [brand]. Their request is in /[email or file].\n\nTurn it into a proper brief:\n- Goal\n- The one thing the customer should remember\n- Audience\n- Channels and formats, with exact sizes\n- What must be included\n- Arabic and English needs\n- Any partner brand rules that apply\n- What we are not doing\n- Who approves it\n- Dates, working back from the live date\n\nThen list the five things the brief still does not tell us.\n\nDo not invent a goal or an audience they did not ask for."}]},
+        {t:"Content calendar", c:"Weekly",
+         d:"Checking the last six weeks of posts stops the same idea appearing four times a quarter.",
+         p:[{id:"MC-02", n:"Next week's calendar", hint:"Giving it past posts is what makes this better than starting from a blank page.",
+            b:"Build next week's content calendar for [brand]. Read /[promotion calendar] and /[last month's engagement report].\n\nFor each day give: channel, format, the hook in eight words or fewer, the product or offer it supports, and who owns it.\n\nCheck /[past posts file]. Do not repeat a hook we used in the last six weeks. Tell me which ones you skipped and why.\n\nGive it as a table. Flag any day where the promotion calendar gives us nothing to post."}]},
+        {t:"Arabic and English copy", c:"Daily",
+         d:"The back-translation lets someone who does not read Arabic check the meaning, without pretending to check the language.",
+         p:[{id:"MC-03", n:"Arabic with back-translation", hint:"A native speaker still signs it off. This speeds up the draft. It does not replace approval.",
+            b:"Translate this into Arabic for customers in the UAE: [paste English copy].\n\nThen give me:\n1. A translation of your Arabic back into English, so I can check the meaning.\n2. Anything you changed because a direct translation would sound wrong.\n3. Any phrase that Gulf customers would understand differently from Levantine or North African customers.\n\nKeep product names, style codes, SKU codes, brand names and measurements exactly as they are in the English. Do not change units, model numbers or partner brand names."}]},
+        {t:"Seasonal VM rollout", c:"Seasonal",
+         d:"One concept, many stores, every store a different size. The exceptions list is the real output.",
+         p:[{id:"MC-04", n:"Store-by-store VM sheet", hint:"Ask what a store should do <b>instead</b>, not just that something will not fit.",
+            b:"Read the seasonal VM concept in /[concept deck] and the store list in /[store list].\n\nFor each store, give:\n- Which parts of the concept fit that store's space\n- The order to install them\n- The kit list\n- The photos we need back\n\nIf a store cannot take a part, say so, and say what it should do instead.\n\nOne row per store. Then list separately any part that does not fit in more than half the stores."}]},
+        {t:"Too much feedback", c:"As needed",
+         d:"Feedback comes by email, Teams and file comments. Someone has to find the contradictions before the designer does.",
+         p:[{id:"MC-05", n:"Sort the feedback", hint:"Splitting <b>must change</b> from <b>opinion</b> is the whole point. Name who said what on the contradictions.",
+            b:"Collect all the feedback on [asset name] from this email thread, the [channel] Teams channel, and the comments in /[file].\n\nSort it into three groups:\n1. Must change: brand rules, legal, or facts\n2. Opinion\n3. Comments that contradict each other\n\nFor group 3, say who said what and when.\n\nThen write one email asking for a single decision, addressed to the people who disagree. Under 120 words. Make it easy for them to answer."}]},
+        {t:"After a campaign", c:"As needed",
+         d:"Judged against the original brief, not against a story written afterwards.",
+         p:[{id:"MC-06", n:"Campaign review", hint:"Reading the original brief stops the review quietly changing what success meant.",
+            b:"Write the review of [campaign]. Read /[results file] and /[original brief].\n\nStart by answering one question: did it do what the brief said it would?\n\nThen four parts:\n1. What we planned to do\n2. What happened\n3. What we would keep\n4. What we would not do again\n\nOnly use numbers from the results file.\n\nEnd with three things the next brief should say differently. Be specific. \"Clearer goal\" is not specific enough."}]}
+      ]
+    },
+    {
+      code:"DF", v:"--df", g:"trade", name:"Digital Commerce & Fulfilment", short:"Online trading and delivery",
+      also:"ecommerce, website, product page, PDP, last mile, carrier, warehouse, peak",
+      intro:"Online produces more numbers in a day than the rest of the business produces in a week, and this team has the least time to read them. These prompts sort quickly: what moved, is it a website problem or a demand problem, and what should I fix first.",
+      moments:[
+        {t:"Daily trading check", c:"Daily",
+         d:"Written so you can paste it straight into a leadership channel. That is why the word limit is there.",
+         p:[{id:"DF-01", n:"Yesterday online", hint:"The useful judgement is website problem or demand problem, not the totals.",
+            b:"Summarise yesterday's online trading for [brand]. Read /[daily ecommerce report].\n\nGive revenue, orders, average order value and conversion. Compare each one to the same day last week and to plan.\n\nName the three categories that moved most.\n\nSay if anything looks like a website or stock problem rather than a demand problem, and why you think so.\n\nUnder 150 words, for a Teams channel. No tables. If a number is missing from the report, name it."}]},
+        {t:"Product page quality", c:"Weekly",
+         d:"Sorting by revenue first means the hour you spend goes to the pages that matter.",
+         p:[{id:"DF-02", n:"Check and fix product pages", hint:"<b>Copy specifications exactly</b>. Sizes, materials and model codes must never be reworded.",
+            b:"Check the product pages in /[PDP export] against our content rules in /[standards document].\n\nFor each SKU, flag what is missing or weak: title format, number of bullets, number of images, Arabic description, specifications, sizes or variants, category.\n\nSort by SKU revenue so I fix the biggest first.\n\nThen write better titles and bullets for the top 10 only. Copy every specification, size, material, capacity and model or style code exactly as given. Do not reword, round or convert them."}]},
+        {t:"Failed deliveries", c:"Weekly",
+         d:"Reason, area and carrier. Then a meeting with the three people who can fix it.",
+         p:[{id:"DF-03", n:"Delivery problems", hint:"Telling it to use <b>only the columns in the file</b> stops it inventing reasons that sound right.",
+            b:"Read /[delivery performance file]. For [period], break down failed and late deliveries by reason, area and carrier.\n\nShow the top three reasons by number, and separately the top three by cost. They will not be the same.\n\nFor each one, say if it is a planning problem, a carrier problem or a wrong customer address. Use only the columns in the file.\n\nThen write an agenda for a 30-minute meeting with the three owners. Put a decision against each item."}]},
+        {t:"Getting ready for peak", c:"As needed",
+         d:"Last year's review is the most useful file in the folder, and the one nobody opens again.",
+         p:[{id:"DF-04", n:"Peak checklist", hint:"The last line is what makes this prompt worth running.",
+            b:"[Peak event, for example DSF, White Friday, Ramadan, back to school] starts on [date]. Read /[last year's review] and /[this year's plan].\n\nBuild a checklist covering stock, website, delivery capacity, customer service cover and communications.\n\nEach item needs an owner, a due date and a status. Write \"unknown\" where the files do not say. Do not assume anything is on track.\n\nAt the top, list every problem from last year that is not fixed in this year's plan."}]},
+        {t:"Capacity decisions", c:"Monthly",
+         d:"A note that holds the recommendation until the end, so the reader sees the options first.",
+         p:[{id:"DF-05", n:"Capacity note", hint:"Asking for the recommendation last gives you a better argued note than asking for it first.",
+            b:"Write a one-page note to [recipient] about inbound and warehouse capacity for [period]. Read /[inbound schedule] and /[capacity file].\n\nSay:\n- Which weeks are over capacity, and by how much\n- The options, with the cost and the risk of each\n- What decision I need from them\n\nDo not give a recommendation until the last paragraph. Then give one, and say what would make you change it.\n\nStart with the week that breaks first. No introduction."}]}
+      ]
+    },
+    {
+      code:"HR", v:"--hr", g:"corp", name:"HR Business Partnering", short:"Cases, people packs and manager support",
+      also:"employee relations, attrition, exit interview, performance review, salary review, headcount",
+      intro:"HRBPs move between three things: cases that need care, processes that run to a calendar, and managers who need help having a difficult conversation. Copilot helps with the writing around all three. It must never decide a case, and nothing about a colleague goes anywhere except work Copilot and the HR system.",
+      moments:[
+        {t:"Monthly people pack", c:"Monthly",
+         d:"Three files in, one pack out, with the gaps marked instead of filled in.",
+         p:[{id:"HR-01", n:"People pack", hint:"<b>Not in the file</b> is more useful to a leadership team than a number that looks right.",
+            b:"Build the monthly people pack for [brand or region]. Read /[headcount file], /[attrition file] and /[training completion file].\n\nParts:\n1. Headcount against plan, by store\n2. Joiners and leavers\n3. Attrition rate, with the last six months\n4. Training completed\n5. The three people risks I would raise to the leadership team\n\nOnly use numbers in the files. Write \"not in the file\" where a number is missing. Do not work around a gap.\n\nFor each risk, say which file supports it."}]},
+        {t:"Helping a manager have a hard conversation", c:"As needed",
+         d:"Most managers do not avoid the conversation because they do not care. They avoid it because they do not know the first sentence.",
+         p:[{id:"HR-02", n:"Manager conversation guide", hint:"<b>Read the policy first</b> stops you coaching a manager into something the policy does not allow.",
+            b:"A manager, [name], needs to talk to someone in their team about [the issue].\n\nFirst read /[our policy on this] and tell me what the policy says. Do this before writing anything.\n\nThen give the manager:\n- The first two sentences\n- Three facts to state, described as actions and not personality\n- Two questions to ask\n- What should be agreed by the end\n- What to write down afterwards\n\nHalf a page. Plain words the manager can actually say out loud.\n\nIf this needs a formal process rather than a conversation, say so and stop."}]},
+        {t:"Writing up a case meeting", c:"As needed",
+         d:"A clear record, written the same way every time, with no opinions in it.",
+         p:[{id:"HR-03", n:"Case meeting record", hint:"Keep this in work Copilot only, and save the record where HR records are kept. Never anywhere else.",
+            b:"Turn my notes below into a clear record of an employee relations meeting.\n\nInclude: date, who was there, what was discussed, what each person said, what was agreed, and next steps with dates.\n\nWrite only what is in my notes. Do not add opinions. Do not say who was right.\n\nIf something important is missing — a date, a name, an agreement — list it at the end as a question for me.\n\nMy notes: [paste]"}]},
+        {t:"Performance or salary review round", c:"Each period",
+         d:"The round is the same every time. What changes is what went late last time.",
+         p:[{id:"HR-04", n:"Review round plan", hint:"Asking what went late last round is the part that actually improves the next one.",
+            b:"We are starting the [performance or salary] review round for [brand or region]. Read /[the process document] and /[last round's timeline].\n\nGive me:\n1. A week-by-week plan working back from [final date]\n2. What each manager has to do, and by when\n3. The three things that went late last round\n4. A short message I can send to managers to start it off\n\nOnly use dates from the files. If a date is missing, say so.\n\nDo not include anyone's pay or rating."}]},
+        {t:"Why people are leaving", c:"Each period",
+         d:"Patterns, not individuals. One or two people leaving is not a pattern.",
+         p:[{id:"HR-05", n:"Exit interview patterns", hint:"<b>Do not name individuals</b> keeps this usable in a leadership meeting.",
+            b:"Read /[exit interview file] for [period]. Group the reasons people gave for leaving.\n\nShow: the most common reasons, which stores or teams they came from, and how long those people had been with us.\n\nSay which patterns are strong enough to act on, and which are only one or two people.\n\nDo not name individuals. Do not guess a reason that is not in the file."}]}
+      ]
+    },
+    {
+      code:"TA", v:"--ta", g:"corp", name:"Talent Acquisition", short:"Adverts, interviews, offers and pipeline",
+      also:"recruitment, hiring, job advert, screening, scorecard, candidate, offer letter",
+      intro:"Recruitment is a pipeline with writing at every step: adverts, screening scripts, interview questions, scorecards, offers, rejections. Copilot is fast at all of it. It must never score a candidate for you, and it must never be asked to judge a CV.",
+      moments:[
+        {t:"A new role opens", c:"As needed",
+         d:"A scoring sheet before the interviews, not a discussion afterwards.",
+         p:[{id:"TA-01", n:"Hiring pack", hint:"The fairness line is a rule, not a formality. Check the answer against it before you send anything.",
+            b:"Build a hiring pack for [role] in [store or function]. Read /[existing job description] and /[the hiring manager's email].\n\nGive me:\n1. A job advert for the UAE\n2. A scoring sheet with six things to look for, and what a 1, a 3 and a 5 look like for each\n3. Eight interview questions linked to those six things\n4. Three questions that would show if someone is exaggerating their experience\n\nDo not include age, nationality, gender, marital status or photo requirements, and nothing that hints at them.\n\nFlag anything in the old job description we should not reuse."}]},
+        {t:"Screening calls", c:"As needed",
+         d:"Fifteen minutes on the phone, asked the same way for every candidate.",
+         p:[{id:"TA-02", n:"Screening script", hint:"The same script for everyone is what makes the comparison fair later.",
+            b:"I am screening candidates for [role]. Read the scoring sheet in /[file].\n\nWrite a 15-minute phone screening script:\n- How to open\n- Six questions that check the must-have requirements\n- What a good answer and a weak answer sound like for each\n- How to close, and what to tell them happens next\n\nAsk only about things needed to do the job. Do not ask about age, marital status or family plans. Follow our hiring policy on right-to-work questions.\n\nOne page."}]},
+        {t:"After an interview", c:"As needed",
+         d:"Turn messy notes into a scorecard. The scoring is still yours.",
+         p:[{id:"TA-03", n:"Notes into a scorecard", hint:"<b>No evidence</b> is the right answer when your notes do not cover something. Do not let it fill the gap.",
+            b:"Turn my interview notes into a scorecard for [candidate] for [role]. Use the six criteria in /[scoring sheet].\n\nFor each criterion: what the candidate actually said, which score that supports, and how strong the evidence is.\n\nWhere my notes do not cover a criterion, write \"no evidence\" instead of giving a score.\n\nDo not give an overall recommendation. I will decide.\n\nMy notes: [paste]"}]},
+        {t:"Offers and rejections", c:"As needed",
+         d:"The two emails nobody enjoys writing, written well every time.",
+         p:[{id:"TA-04", n:"Offer and rejection emails", hint:"Pay details are added by you, by hand, outside Copilot.",
+            b:"Write two emails for [role].\n\n1. An offer email to [name]. Include the start date, who they report to, and what happens next. Do not include any salary or package details. I will add those myself.\n\n2. A rejection email for candidates who reached the final stage. Respectful and specific enough to feel human, without giving feedback we cannot support.\n\nBoth under 150 words. Warm and clear. No business jargon."}]},
+        {t:"Weekly pipeline update", c:"Weekly",
+         d:"Longest-open roles first, because those are the ones hiring managers have stopped asking about.",
+         p:[{id:"TA-05", n:"Pipeline update", hint:"Sorting by days open puts the forgotten roles at the top, where they belong.",
+            b:"Build my weekly recruitment update from /[pipeline file].\n\nFor each open role show: days open, current stage, how many candidates at each stage, and what is blocking it.\n\nSort by days open, longest first.\n\nThen write three short lines for the hiring managers whose roles moved backwards or did not move at all this week.\n\nOnly use what is in the file. Write \"not in the file\" where something is missing."}]}
+      ]
+    },
+    {
+      code:"LD", v:"--ld", g:"corp", name:"Learning & Development", short:"Turning documents into training",
+      also:"training, induction, session plan, skill gap, academy, onboarding",
+      intro:"L&D writes a lot and delivers a lot, usually to people who can spare twenty minutes before a store opens. Copilot is good at turning long documents into short sessions, and at checking whether training matched what the business actually needed.",
+      moments:[
+        {t:"Turning a policy into training", c:"As needed",
+         d:"A 30-page process document is not training. This turns it into something usable on a shop floor.",
+         p:[{id:"LD-01", n:"Document into training", hint:"The line about English as a second language changes the output more than anything else here.",
+            b:"Turn /[policy or process document] into training for [audience, for example store colleagues].\n\nGive me:\n1. The five things they must remember\n2. Three real situations where they would use it, written as short scenarios\n3. Five questions to check understanding, with the answers\n4. What good looks like on the shop floor\n\nPlain words. Short sentences. Assume English is a second language for many of the people reading it.\n\nIf the document is unclear on something important, list it instead of guessing."}]},
+        {t:"Designing a short session", c:"As needed",
+         d:"Twenty minutes in a stockroom, no screen, no slides.",
+         p:[{id:"LD-02", n:"20-minute session plan", hint:"Asking for <b>exactly what the trainer says</b> is what makes this usable by someone who is not a trainer.",
+            b:"Design a 20-minute session on [topic] for [number] people in [setting, for example a stockroom before opening].\n\nGive me a plan with timings:\n- Opening, 2 minutes\n- The main point, 5 minutes\n- A practice activity, 8 minutes\n- Questions and close, 5 minutes\n\nInclude exactly what the trainer says at each step, and the one thing people should do differently tomorrow.\n\nNo slides. Nothing that needs a screen."}]},
+        {t:"Finding the real training need", c:"Each period",
+         d:"Not everything is a training problem, and saying so is the most useful thing L&D can do.",
+         p:[{id:"LD-03", n:"Skill gap check", hint:"Point 3 is the one that saves money. Ask for it every time.",
+            b:"Read /[performance file], /[mystery shop results] and /[manager feedback file] for [brand or region].\n\nTell me:\n1. The three skill gaps the data actually shows\n2. What the data suggests is the cause, and what it cannot tell us\n3. Which gaps training would fix, and which are a process, staffing or systems problem instead\n\nBe honest about point 3. Do not recommend training for something training cannot fix."}]},
+        {t:"Did the training work", c:"Monthly",
+         d:"Completion rates tell you people clicked. This asks whether anything changed.",
+         p:[{id:"LD-04", n:"Training impact check", hint:"<b>A link, not a cause</b> keeps you honest when someone asks for proof.",
+            b:"Compare training completion in /[training file] with performance in /[performance file] for [period].\n\nTell me:\n1. Where completion is high and performance improved\n2. Where completion is high and nothing changed\n3. Where completion is low\n\nSay clearly that this shows a link, not a cause. Other things could explain it.\n\nThen list the three courses worth keeping and the three worth reviewing."}]},
+        {t:"New starter induction", c:"As needed",
+         d:"Five days, planned day by day, so nobody spends week one standing around.",
+         p:[{id:"LD-05", n:"First week plan", hint:"Including breaks and prayer times is what makes a plan realistic rather than theoretical.",
+            b:"Build a first-week induction plan for a new [role] in [store or function]. Read /[induction checklist] and /[role description].\n\nGive me a day-by-day plan for five days:\n- What they do\n- Who they shadow\n- What they must be signed off on\n- What their manager checks at the end of each day\n\nHalf a page per day. Include breaks and prayer times.\n\nIf the checklist does not cover something in the role description, list it at the end."}]}
+      ]
+    },
+    {
+      code:"FI", v:"--fi", g:"corp", name:"Finance, Risk & Compliance", short:"Close, commentary, business cases and audit",
+      also:"month end, P&L, margin, budget, forecast, SOP, controls, loss prevention, shrink",
+      intro:"Finance reads more than it writes, and most of what it writes is a pack someone else will question. These prompts help with reading quickly and checking carefully. Copilot cannot be trusted with arithmetic, so every number still gets checked against the system before it leaves your desk.",
+      moments:[
+        {t:"Month-end close", c:"Monthly",
+         d:"The same list every month. What changes is what was late last time.",
+         p:[{id:"FI-01", n:"Close checklist", hint:"Flagging what was late last month turns a checklist into a plan.",
+            b:"Build my month-end close checklist for [brand or entity]. Read /[last month's close checklist] and /[this month's calendar].\n\nFor each task show: what it is, who does it, the day it is due, and what it depends on.\n\nPut it in date order. Flag any task that was late last month.\n\nOnly use tasks from the files. Do not invent steps."}]},
+        {t:"Writing the finance commentary", c:"Monthly",
+         d:"Five paragraphs that someone else will question line by line.",
+         p:[{id:"FI-02", n:"Period commentary", hint:"<b>Do not calculate anything yourself</b> is the most important line in this prompt.",
+            b:"Write the finance commentary for [brand] for [period]. Read /[the results file] and /[last period's commentary].\n\nFive short paragraphs:\n1. Sales against plan and against last year\n2. Margin, and what moved it\n3. Costs, and what moved them\n4. The two risks to the forecast\n5. What I need from the business\n\nEvery number must come from the file, with the sheet named next to it. Do not calculate anything yourself. If a figure is not in the file, write \"not in the file\"."}]},
+        {t:"Checking a business case", c:"As needed",
+         d:"Read it as a doubter. The missing costs are usually the problem, not the benefits.",
+         p:[{id:"FI-03", n:"Question a business case", hint:"Point 4 catches more bad cases than anything else on this list.",
+            b:"I am reviewing the business case in /[file]. Do not summarise it. Check it.\n\nList:\n1. The assumptions the numbers rest on\n2. Which assumptions nothing in the file supports\n3. Any benefit counted twice\n4. Costs that are missing — people, systems, training, and running costs after year one\n5. What would have to go wrong for this to lose money\n\nThen give me six questions to ask. Put the hardest one first."}]},
+        {t:"Budget or forecast round", c:"Each period",
+         d:"The timetable, the old assumptions, and the three numbers the business will have to defend.",
+         p:[{id:"FI-04", n:"Round preparation", hint:"<b>Do not produce any budget numbers</b> keeps this a planning tool, not a shortcut.",
+            b:"Get me ready for the [budget or forecast] round for [brand]. Read /[the timetable], /[last round's submission] and /[current performance file].\n\nGive me:\n1. The dates and what is due on each one\n2. What we assumed last round, and whether it held\n3. The three numbers the business will be asked to defend\n4. What I need from each department head, and by when\n\nDo not produce any budget numbers."}]},
+        {t:"Changing a procedure", c:"As needed",
+         d:"The side-by-side list is what gets approved. The clean version is what gets published.",
+         p:[{id:"FI-05", n:"Update an SOP", hint:"The last line catches the section three pages later that nobody remembers.",
+            b:"Update the SOP in /[current SOP] for this change: [describe the change].\n\nGive me two things:\n1. A clean updated version\n2. A change list showing the old words and the new words side by side\n\nKeep the section numbers the same.\n\nThen flag any other section that now disagrees with the change, or still mentions the old way."}]},
+        {t:"Getting ready for an audit", c:"Every 3 months",
+         d:"Controls, proof, where it is kept, and last time's open points, ready before the auditor asks.",
+         p:[{id:"FI-06", n:"Audit prep", hint:"Making it mark unproven items stops you walking in thinking something was fixed.",
+            b:"We have an audit of [process] on [date]. Read /[process documentation] and /[last audit report].\n\nList:\n1. The controls we say we operate\n2. The proof needed for each one\n3. Where that proof is kept, if the documents say\n4. The findings from last time that we promised to fix\n\nFor point 4, mark clearly anything where the files do not show whether it was fixed. A plan is not proof."}]}
+      ]
+    },
+    {
+      code:"LE", v:"--le", g:"corp", name:"Leasing & Property", short:"Renewals, rent, service charge and fit-out",
+      also:"lease, landlord, mall, rent review, notice date, handover, store opening, store closure, facilities",
+      intro:"We are the tenant. We rent space from landlords, mostly in malls. The work runs for a long time: a renewal that starts eighteen months early, a service charge argument that runs for a year, a fit-out with twenty things depending on each other. Copilot is good at pulling a long history into one place. It is not a lawyer, so every question about what a clause means goes to Legal.",
+      moments:[
+        {t:"Lease renewal coming up", c:"As needed",
+         d:"Two years of emails with one landlord, in date order, in one place. This is the most useful prompt in the team.",
+         p:[{id:"LE-01", n:"Renewal history", hint:"<b>The date and the message</b> turns a summary into evidence you can put in front of a landlord.",
+            b:"We have a lease renewal for [store] at [mall or landlord] on [date].\n\nSearch my email, Teams chats, meetings and files from the last 24 months about this store and this landlord. Give me:\n\n1. A list in date order of what we agreed, asked for, or complained about\n2. Every promise the landlord made, with the date and which message it came from\n3. Problems that were never resolved — fit-out, access, signage, service charge, works, footfall\n4. What we asked for at the last renewal, and what we actually got\n\nMark clearly anything you worked out yourself rather than found.\n\nTwo pages. Then the five questions I should ask the landlord first.\n\nDo not give an opinion on any lease clause. Legal does that."}]},
+        {t:"Rent discussion", c:"As needed",
+         d:"Both sides of the argument, prepared before the meeting rather than during it.",
+         p:[{id:"LE-02", n:"Rent negotiation prep", hint:"<b>Do not invent market rent figures.</b> Made-up comparisons are the fastest way to lose a negotiation.",
+            b:"Get me ready for a rent discussion with [landlord] about [store]. Read /[store performance file] and /[current rent and service charge file].\n\nGive me:\n1. How the store trades now compared with when we signed\n2. Rent and service charge as a percentage of sales, now and then, using only numbers in the files\n3. What has changed in the centre that affects us — new anchors, closures, building works, access, parking — using only what is in my emails and files\n4. The three strongest points for us, and the three strongest points the landlord will make\n\nDo not invent market rent figures or comparisons with other centres. If we do not have the data, say so."}]},
+        {t:"Service charge statement", c:"Each period",
+         d:"Line by line against last year. The questions write themselves once you can see the changes.",
+         p:[{id:"LE-03", n:"Service charge check", hint:"Ask it to find lines with <b>no explanation attached</b>. Those are usually the ones worth questioning.",
+            b:"Compare the service charge in /[this year's statement] against /[last year's statement] for [store].\n\nShow every line that changed, the amount, and the percentage change.\n\nList the lines that went up most by value.\n\nList any line that appears this year but not last year, and any line with no explanation attached.\n\nThen write the questions I should send the landlord about the lines you flagged.\n\nDo not work out whether a charge is allowed under the lease. Send those points to Legal."}]},
+        {t:"Key dates across the portfolio", c:"Monthly",
+         d:"A missed notice deadline is the most expensive mistake this team can make.",
+         p:[{id:"LE-04", n:"Lease calendar", hint:"<b>Do not guess a date.</b> A wrong notice date is worse than a missing one.",
+            b:"Build my lease calendar for the next 18 months for [brand or region] from /[lease schedule].\n\nFor each store show: expiry date, notice deadline, rent review date, and any option date.\n\nSort by whichever deadline comes first.\n\nFlag anything where the notice deadline falls in the next six months, and anything where a date is missing from the file.\n\nDo not guess a date."}]},
+        {t:"New store fit-out", c:"As needed",
+         d:"Working backwards from opening day, with the landlord's obligations separated from ours.",
+         p:[{id:"LE-05", n:"Fit-out plan", hint:"Splitting <b>what the landlord delivers</b> from <b>what we deliver</b> is what makes this usable in a handover meeting.",
+            b:"We are fitting out [store] at [location]. Handover is [date] and opening is [date]. Read /[the handover document] and /[the fit-out programme].\n\nGive me:\n1. A plan working back from opening day, week by week\n2. What the landlord has to deliver, and by when\n3. What we have to deliver, and by when\n4. Every approval needed — landlord, mall management, authorities — and who applies for it\n5. The three things most likely to slip, based on what the files say\n\nMark anything the files do not give a date for as \"unknown\". Do not assume."}]},
+        {t:"Closing a store", c:"As needed",
+         d:"Notice periods, reinstatement, final charges and who to tell, in date order.",
+         p:[{id:"LE-06", n:"Store exit plan", hint:"The reinstatement obligation is the one people forget until the final bill arrives.",
+            b:"We are closing [store] at [location] on [date]. Read /[the lease summary] and /[the closure checklist].\n\nGive me a plan covering:\n- The notice we must give, and by when\n- What we must remove or put back\n- Final service charge and utilities\n- People, stock and fixtures\n- Who we must tell, and when\n\nPut it in date order, working back from the closing date.\n\nFlag anything the files do not cover. Do not interpret the lease. Send those points to Legal."}]}
+      ]
+    },
+    {
+      code:"EA", v:"--ea", g:"corp", name:"Executive Assistants & Office", short:"Calendars, inboxes, briefs and actions",
+      also:"diary, travel, agenda, minutes, PMO, office management",
+      intro:"Executive assistants protect other people's time, chase what nobody else chases, and turn messy conversations into actions. Most of that is spotting patterns and writing short messages, which Copilot does well. None of these prompts send anything. You decide what goes out.",
+      moments:[
+        {t:"The week ahead", c:"Weekly",
+         d:"Spotting the problems in a calendar before they become someone's bad Thursday.",
+         p:[{id:"EA-01", n:"Week ahead check", hint:"Chasing missing agendas is the single most useful admin task there is.",
+            b:"Look at [executive]'s calendar for next week. Tell me:\n\n1. Where meetings run back to back with no travel time between stores or sites\n2. Any meeting with no agenda or no stated purpose\n3. Any clash or double booking\n4. Any travel without enough time either side\n\nThen write short notes to chase the missing agendas, one for each organiser. Keep them brief and friendly."}]},
+        {t:"Inbox triage", c:"Daily",
+         d:"Four groups, twice a day. Nothing gets moved or deleted.",
+         p:[{id:"EA-02", n:"Sort the inbox", hint:"<b>Do not move or delete anything</b> keeps you in control of someone else's mailbox.",
+            b:"Go through [executive]'s inbox from the last two days. Sort it into four groups:\n\n1. Needs them personally, today\n2. Needs them, but can wait\n3. I can answer\n4. Nothing needed\n\nFor group 1, give one line each on what is being asked and by when.\nFor group 3, draft my replies for them to check.\n\nDo not move or delete anything. Just tell me."}]},
+        {t:"Preparing them for a meeting", c:"As needed",
+         d:"One page on who they are meeting and what was last said, built from a year of email.",
+         p:[{id:"EA-03", n:"Meeting brief", hint:"Points 3 and 4 are what stop a meeting opening with an apology.",
+            b:"[Executive] has a meeting with [person or company] on [date] about [subject].\n\nSearch our email, meetings and files from the last 12 months with them. Give me a one-page brief:\n\n1. Who is attending and their role\n2. What we last agreed or discussed, with dates\n3. Anything we promised and have not done\n4. Anything they promised and have not done\n5. The three things [executive] should be ready for\n\nMark anything you worked out yourself rather than found. One page maximum."}]},
+        {t:"Travel and store visits", c:"As needed",
+         d:"A plan with real travel time in it, and a list of what is still not confirmed.",
+         p:[{id:"EA-04", n:"Trip plan", hint:"Asking where the timings are <b>too tight</b> is better than asking it to build a schedule and hoping.",
+            b:"[Executive] is travelling to [place] from [date] to [date] for [purpose]. Read their calendar and /[the itinerary file].\n\nGive me:\n1. A day-by-day plan with times, including travel between places\n2. Where the timings are too tight\n3. What is still not booked or confirmed\n4. Who needs to be told about each part\n\nThen write the short messages to chase anything not confirmed.\n\nFlag any clash with something already in their calendar."}]},
+        {t:"Running a recurring meeting", c:"Monthly",
+         d:"Agenda, open actions, and the message that goes out three days before.",
+         p:[{id:"EA-05", n:"Meeting pack", hint:"Carrying forward last meeting's actions is what stops a standing meeting becoming a chat.",
+            b:"I run the [meeting name] meeting. Read /[last meeting's notes] and /[the standing agenda].\n\nBuild the pack for the next one:\n1. Agenda with timings\n2. Actions from last time, with the owner and whether they are done\n3. What each person needs to bring\n4. Decisions needed this time\n\nThen write the message I send to attendees three days before, asking for their inputs.\n\nOnly use what is in the files. List anything missing as a question for me."}]},
+        {t:"Turning notes into actions", c:"Weekly",
+         d:"Minutes nobody reads become actions somebody owns.",
+         p:[{id:"EA-06", n:"Actions only", hint:"<b>Agreed or assumed</b> stops a date Copilot invented becoming a promise someone else made.",
+            b:"Read the recap of [meeting]. Give me only the actions.\n\nFor each one: owner, the action in one sentence starting with a verb, the due date, and whether that date was agreed in the meeting or assumed by you.\n\nThen list separately anything that sounded like a decision but nobody confirmed by name.\n\nDo not summarise the discussion."}]}
+      ]
+    },
+    {
+      code:"LF", v:"--lf", g:"lead", name:"Leadership & Strategy", short:"Reading packs and making decisions",
+      also:"MD, GM, board, business review, decision, announcement, transformation",
+      intro:"The problem here is not writing things. It is reading them: packs, escalations, long email threads, and the things nobody has told you. These prompts ask Copilot to challenge rather than summarise. The most useful one asks it to attack a pack instead of describing it.",
+      moments:[
+        {t:"Monday read", c:"Weekly",
+         d:"Twenty minutes on Monday that sets the week. The fourth point is what makes it worth doing.",
+         p:[{id:"LF-01", n:"Start of the week", hint:"<b>The one thing nobody is looking at</b> is a different question from a summary. That is where this earns its place.",
+            b:"Give me my Monday read for [brand or region]. Read /[weekly trading file], my email and Teams from the last seven days, and my calendar for this week.\n\nFour parts:\n1. The number that changed most, and why, if the files say\n2. The three things my team raised that I have not answered\n3. What is being decided this week, from my calendar\n4. The one thing nobody is looking at\n\nUnder 300 words. Be direct. Say where you are guessing rather than reporting."}]},
+        {t:"Reading a pack", c:"Monthly",
+         d:"Read it as a doubter before the meeting, not as a reader during it.",
+         p:[{id:"LF-02", n:"Question the pack", hint:"This is the one prompt worth showing a leadership team first.",
+            b:"I am reading the [function] monthly pack in /[file] before the meeting. Do not summarise it. Check it.\n\nList:\n- Claims the data does not support\n- Comparisons that use a helpful starting point\n- Anything called a trend with fewer than three data points\n- Measures that changed meaning since last month\n- Questions the pack avoids\n\nThen give me six questions to ask. Put the hardest one to dodge first.\n\nDo not tell me what the pack says. I have read it."}]},
+        {t:"Business review", c:"Each period",
+         d:"Write the story first. The slides come after.",
+         p:[{id:"LF-03", n:"Review write-up", hint:"Naming the sheet behind every number means you can defend it when challenged.",
+            b:"Write the [brand] section of the [period] business review. Read /[performance file] and /[last period's pack].\n\nCover:\n1. Where we are against plan\n2. The two things working\n3. The two things not working, and what we are doing about them\n4. The decision we need\n\nGive it as a plan for six slides, one headline and three points each.\n\nEvery number must come from the file, with the sheet named next to it. If last period's pack promised something, say whether the data shows it happened."}]},
+        {t:"Making a decision", c:"As needed",
+         d:"Built to separate what we know from what we are assuming, and to agree now what being wrong would look like.",
+         p:[{id:"LF-04", n:"Decision note", hint:"The 90-day check is the part most decision papers are missing.",
+            b:"I need to decide [decision]. Read my files, email and meetings from the last [period].\n\nGive me:\n1. What we know\n2. What we are assuming\n3. The options, with the cost and risk of each\n4. What would need to be true for each option to be the right one\n5. What we would see in the next 90 days if we chose wrong\n\nMark every line as either fact or assumption.\n\nDo not choose for me."}]},
+        {t:"Message to everyone", c:"As needed",
+         d:"Honest, specific, and short enough to read in a stockroom.",
+         p:[{id:"LF-05", n:"All-colleague message", hint:"Naming the hard part at the start is what stops it reading like corporate noise.",
+            b:"Write a message to everyone in [brand or region] about [topic].\n\nBackground: [paste].\n\nIt must:\n- Be honest about [the difficult part]\n- Say what changes for them\n- Say what does not change\n- Say when they will hear more\n\nUnder 250 words. No business jargon. No exclamation marks. Do not thank people for their hard work.\n\nThen give me a three-line version for store WhatsApp groups, and the same three lines in Arabic."}]}
+      ]
+    },
+    {
+      code:"ALL", v:"--lf", g:"lead", name:"Everyone, every team", short:"Six prompts that work for all of us",
+      also:"leave, catch up, inbox, email thread, shorten, find a file",
+      intro:"Six prompts that have nothing to do with your job title and everything to do with the week everyone has. They work straight away, which makes them the right place to start. Teach these on day one.",
+      moments:[
+        {t:"Back from leave", c:"As needed", d:"Sorted by what causes a problem first, not by what arrived first.",
+         p:[{id:"ALL-01", n:"What I missed", hint:"Sorting by urgency rather than by date is what makes this better than scrolling your inbox.",
+            b:"I have been away since [date]. Tell me what I missed:\n- Decisions made\n- Things waiting for me\n- Deadlines that moved\n- Anything passed up with my name on it\n\nPut the things that will cause a problem soonest at the top, not the oldest first.\n\nUnder 200 words. Add a link or file name for each item so I can go straight to it."}]},
+        {t:"A meeting I missed", c:"As needed", d:"Specifically what affects you, including anything said about your area.",
+         p:[{id:"ALL-02", n:"Meeting catch-up", hint:"Asking it to copy mentions of your name turns a recap into something you can act on.",
+            b:"I missed the [meeting name] meeting on [date]. From the recap, tell me:\n- What was decided\n- What is still open\n- Who has an action\n- What affects my work\n\nIf my name or my team was mentioned, copy exactly what was said.\n\nThen tell me the one thing to follow up today."}]},
+        {t:"An email thread that will not end", c:"Weekly", d:"Find the decision buried under forty replies, then end it.",
+         p:[{id:"ALL-03", n:"End the thread", hint:"Ask what is <b>stopping agreement</b>, not what was said. Different question, much better answer.",
+            b:"This email thread is too long. Tell me:\n- What is actually being decided\n- What each person wants\n- What is stopping agreement\n- The shortest message that would end it\n\nThen write that message. Under 100 words, to the person who can decide.\n\nIf nobody is actually deciding anything, say so."}]},
+        {t:"Something I wrote is too long", c:"Daily", d:"Half the length, with nothing important lost.",
+         p:[{id:"ALL-04", n:"Make it shorter", hint:"Asking what it removed lets you put back the one thing it should not have cut.",
+            b:"Make this half as long. Do not lose anything that would change a decision: [paste].\n\nKeep every number, date, name and promise exactly as written.\n\nThen tell me what you removed and why, so I can put anything important back."}]},
+        {t:"Finding the right file", c:"Daily", d:"Four versions, three folders, two people who both think theirs is the latest.",
+         p:[{id:"ALL-05", n:"Newest version", hint:"<b>Do not pick one for me</b> avoids the worst thing that can go wrong here.",
+            b:"Find the newest version of [document]. Tell me who changed it last, when, and what the version before it said differently.\n\nIf more than one file could be the one I mean, show me all of them with their dates and owners. Do not pick one for me.\n\nTell me if the newest file is not the one most people are linking to."}]},
+        {t:"Understanding something new", c:"As needed", d:"Explained so you can use it tomorrow, not so you can pass a test.",
+         p:[{id:"ALL-06", n:"Explain it simply", hint:"The three questions at the end are a self-check. If you cannot answer them, ask again.",
+            b:"Explain [term, report or process] so I can use it tomorrow.\n\nUse our own documents if we have them. Say when you are using general knowledge instead.\n\n150 words. Then three questions I should be able to answer if I understood it."}]}
+      ]
+    }
+  ];
+
+  var BY = {}; CREWS.forEach(function(c){BY[c.code]=c;});
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function brackets(s){return esc(s).replace(/\[([^\]]+)\]/g,'<mark>[$1]</mark>');}
+
+  var roleCount={}, rolesByTeam={};
+  ROLES.forEach(function(r){
+    roleCount[r[1]]=(roleCount[r[1]]||0)+1;
+    (rolesByTeam[r[1]]=rolesByTeam[r[1]]||[]).push(r[0]);
+  });
+  var promptCount={};
+  CREWS.forEach(function(c){var n=0;c.moments.forEach(function(m){n+=m.p.length;});promptCount[c.code]=n;});
+
+  /* ---------- team directory, grouped ---------- */
+  var order=["trade","corp","lead"], dir="";
+  order.forEach(function(g){
+    var teams=CREWS.filter(function(c){return c.g===g;});
+    var info=GROUPS[g];
+    dir += '<div class="band"><div class="band-head"><h3>'+esc(info.name)+'</h3><span>'+esc(info.note)+'</span></div><div class="dir">'
+      + teams.map(function(c){
+          var rc = c.code==="ALL" ? "all roles" : roleCount[c.code]+" titles";
+          return '<a href="#crew-'+c.code+'" style="--c:var('+c.v+')"><span class="code">'+c.code+'</span>'
+            +'<span class="nm">'+esc(c.name)+'<span class="ds">'+esc(c.short)+'</span></span>'
+            +'<span class="ct2">'+promptCount[c.code]+' prompts<br>'+rc+'</span></a>';
+        }).join("")
+      + '</div></div>';
+  });
+  document.getElementById("dir").innerHTML = dir;
+
+  /* ---------- all job titles, grouped by team (hidden by default) ---------- */
+  document.getElementById("alltitles").innerHTML = CREWS.filter(function(c){return c.code!=="ALL";}).map(function(c){
+    return '<div class="tgroup" style="--c:var('+c.v+')"><h4>'+c.code+' · '+esc(c.name)+'</h4><div class="chiprow">'
+      + (rolesByTeam[c.code]||[]).map(function(t){
+          return '<a class="chip role" href="#crew-'+c.code+'" style="--c:var('+c.v+')">'+esc(t)+'</a>';
+        }).join("")
+      + '</div></div>';
+  }).join("");
+
+  var tt=document.getElementById("alltitles"), tb2=document.getElementById("toggletitles");
+  tb2.addEventListener("click",function(){
+    tt.classList.toggle("open");
+    tb2.textContent = tt.classList.contains("open") ? "Hide the full list" : "Show all 74 job titles";
+  });
+
+  /* ---------- type to find ---------- */
+  var fin=document.getElementById("find"), fres=document.getElementById("findres"), fmiss=document.getElementById("findmiss");
+  fin.addEventListener("input",function(){
+    var q=fin.value.trim().toLowerCase();
+    if(q.length<2){fres.innerHTML="";fmiss.style.display="none";return;}
+    var hits=[];
+    ROLES.forEach(function(r){
+      var i=r[0].toLowerCase().indexOf(q);
+      if(i>-1) hits.push({t:r[0],c:r[1],rank:i===0?0:1});
+    });
+    CREWS.forEach(function(c){
+      if(hits.some(function(h){return h.c===c.code;})) return;
+      var hay=(c.name+" "+c.short+" "+(c.also||"")).toLowerCase();
+      if(hay.indexOf(q)>-1) hits.push({t:c.name,c:c.code,rank:2});
+    });
+    hits.sort(function(a,b){return a.rank-b.rank;});
+    hits=hits.slice(0,7);
+    if(!hits.length){
+      fres.innerHTML="";
+      fmiss.style.display="block";
+      fmiss.textContent="No match. Try a shorter word, or browse the twelve teams below.";
+      return;
+    }
+    fmiss.style.display="none";
+    fres.innerHTML=hits.map(function(h){
+      var c=BY[h.c];
+      return '<a href="#crew-'+h.c+'" style="--c:var('+c.v+')"><span class="code">'+h.c+'</span>'
+        +'<span>'+esc(h.t)+'</span><span class="tm">'+esc(c.name)+'</span></a>';
+    }).join("");
+  });
+
+  /* ---------- team sections, with a divider at each group ---------- */
+  var out="", lastG=null;
+  CREWS.forEach(function(c){
+    if(c.g!==lastG){
+      var info=GROUPS[c.g];
+      out += '<div class="divider"><div class="dl">'+esc(info.label)+'</div><h2>'+esc(info.name)+'</h2><p>'+esc(info.note)+'</p></div>';
+      lastG=c.g;
+    }
+    var moments=c.moments.map(function(m){
+      var prompts=m.p.map(function(p){
+        return '<div class="prompt" data-search="'+esc((p.id+" "+p.n+" "+m.t+" "+c.name+" "+(c.also||"")+" "+p.b).toLowerCase())+'">'
+          +'<div class="ptop"><span class="pid">'+p.id+'</span><span class="pname">'+esc(p.n)+'</span>'
+          +'<button class="copy" type="button">Copy</button></div>'
+          +'<p class="pbody">'+brackets(p.b)+'</p>'
+          +(p.hint?'<p class="phint">'+p.hint+'</p>':'')+'</div>';
+      }).join("");
+      return '<div class="moment"><div class="moment-head"><h3>'+esc(m.t)+'</h3>'
+        +'<span class="pill c">'+esc(m.c)+'</span></div><p class="md">'+esc(m.d)+'</p>'+prompts+'</div>';
+    }).join("");
+    var chips = c.code==="ALL" ? '<p class="roles">Every job title, in every business.</p>'
+      : '<div class="rolechips">'+(rolesByTeam[c.code]||[]).map(function(t){return '<span>'+esc(t)+'</span>';}).join("")+'</div>';
+    out += '<section class="crew" id="crew-'+c.code+'" style="--c:var('+c.v+')">'
+      +'<div class="crew-head"><div><div class="cc">Team '+c.code+'</div><h2>'+esc(c.name)+'</h2></div>'
+      +'<div class="ct"><b>'+promptCount[c.code]+'</b>prompts</div></div>'
+      + chips + '<p class="intro">'+esc(c.intro)+'</p>'+moments+'</section>';
+  });
+  document.getElementById("crews").innerHTML = out;
+
+  /* ---------- copy ---------- */
+  document.addEventListener("click",function(e){
+    var btn=e.target.closest(".copy"); if(!btn) return;
+    var text=btn.closest(".prompt").querySelector(".pbody").innerText;
+    var done=function(){btn.textContent="Copied";btn.setAttribute("data-done","1");
+      setTimeout(function(){btn.textContent="Copy";btn.removeAttribute("data-done");},1800);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done,function(){fb(text,done);});
+    } else {fb(text,done);}
+  });
+  function fb(t,cb){var a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";
+    document.body.appendChild(a);a.select();try{document.execCommand("copy");cb();}catch(e){}document.body.removeChild(a);}
+
+  /* ---------- prompt search ---------- */
+  var search=document.getElementById("search"), nr=document.getElementById("noresult");
+  search.addEventListener("input",function(){
+    var q=search.value.trim().toLowerCase(), any=false;
+    document.querySelectorAll(".prompt").forEach(function(p){
+      var hit=!q||p.getAttribute("data-search").indexOf(q)>-1;
+      p.classList.toggle("hidden",!hit); if(hit) any=true;
+    });
+    document.querySelectorAll(".moment").forEach(function(m){
+      m.classList.toggle("hidden", !!q && !m.querySelectorAll(".prompt:not(.hidden)").length);
+    });
+    document.querySelectorAll(".crew").forEach(function(c){
+      c.classList.toggle("hidden", !!q && !c.querySelectorAll(".prompt:not(.hidden)").length);
+    });
+    document.querySelectorAll(".divider").forEach(function(d){ d.classList.toggle("hidden", !!q); });
+    nr.style.display=(q&&!any)?"block":"none";
+  });
+
+  /* ---------- back to top ---------- */
+  var topbtn=document.getElementById("top");
+  topbtn.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});
+  var ticking=false;
+  window.addEventListener("scroll",function(){
+    if(ticking) return; ticking=true;
+    window.requestAnimationFrame(function(){
+      topbtn.classList.toggle("show", window.scrollY>900); ticking=false;
+    });
+  },{passive:true});
+
+  /* ---------- theme ---------- */
+  var tb=document.getElementById("themebtn");
+  function cur(){var s=document.documentElement.getAttribute("data-theme");
+    return s||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}
+  function lab(){tb.textContent=cur()==="dark"?"Light":"Dark";}
+  lab();
+  tb.addEventListener("click",function(){
+    document.documentElement.setAttribute("data-theme",cur()==="dark"?"light":"dark");lab();});
+})();
+</script>
+</body>
+</html>
